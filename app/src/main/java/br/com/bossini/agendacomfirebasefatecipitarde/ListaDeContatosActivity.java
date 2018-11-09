@@ -1,5 +1,6 @@
 package br.com.bossini.agendacomfirebasefatecipitarde;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListaDeContatosActivity extends AppCompatActivity {
@@ -24,13 +26,18 @@ public class ListaDeContatosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_de_contatos);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        contatos = new LinkedList<>();
+        adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, contatos);
+        contatosListView = findViewById(R.id.contatosListView);
+        contatosListView.setAdapter(adapter);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(ListaDeContatosActivity.this,
+                                                AdicionaContatoActivity.class);
+                startActivity(intent);
             }
         });
     }
